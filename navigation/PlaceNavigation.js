@@ -10,7 +10,8 @@ import colors from "../constants/colors";
 const headerProp = {
   headerStyle: {
     backgroundColor: colors.primaryColor
-  }
+  },
+  headerTintColor: "#fff"
 };
 
 const Stack = createStackNavigator();
