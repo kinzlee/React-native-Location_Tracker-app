@@ -22,7 +22,11 @@ const PlaceNavigator = () => {
       <Stack.Navigator screenOptions={headerProp}>
         <Stack.Screen name="Places" component={PlaceListScreen} />
         <Stack.Screen name="Maps" component={MapScreen} />
-        <Stack.Screen name="NewPlace" component={NewPlaceScreen} />
+        <Stack.Screen
+          name="NewPlace"
+          component={NewPlaceScreen}
+          options={{ title: "Add Place" }}
+        />
         <Stack.Screen name="PlaceDetails" component={PlaceDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>

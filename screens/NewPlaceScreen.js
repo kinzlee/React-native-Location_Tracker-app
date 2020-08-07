@@ -1,19 +1,44 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  Button
+} from "react-native";
+import colors from "../constants/colors";
 
 const NewPlaceScreen = () => {
   return (
-    <View style={styles.screen}>
-      <Text>This is the New place screen</Text>
-    </View>
+    <ScrollView>
+      <View style={styles.form}>
+        <Text style={styles.label}>This is the New place screen</Text>
+        <TextInput style={styles.textInput} />
+        <Button
+          title="Save Place"
+          color={colors.primaryColor}
+          onPress={() => {}}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+  form: {
+    margin: 30
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 15
+  },
+  textInput: {
+    borderBottomColor: "#fff",
+    borderBottomWidth: 1,
+    marginBottom: 15,
+    padding: 4,
+    paddingHorizontal: 2
   }
 });
 
