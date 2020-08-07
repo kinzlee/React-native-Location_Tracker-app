@@ -28,7 +28,19 @@ const PlaceListScreen = ({ navigation }) => {
     <FlatList
       data={places}
       keyExtractor={item => item.id}
-      renderItem={<PlaceItem />}
+      renderItem={itemData => (
+        <PlaceItem
+          image={null}
+          title={itemData.item.title}
+          address={null}
+          onSelect={() => {
+            navigation.navigate("PlaceDetail", {
+              placeTitle: itemData.item.title,
+              placeId: itemData.item.id
+            });
+          }}
+        />
+      )}
     />
   );
 };
