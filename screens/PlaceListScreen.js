@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import { useSelector } from "react-redux";
+import PlaceItem from "../components/PlaceItem";
 
 const PlaceListScreen = ({ navigation }) => {
   React.useLayoutEffect(() => {
@@ -24,7 +25,11 @@ const PlaceListScreen = ({ navigation }) => {
   const places = useSelector(state => state.places.places);
 
   return (
-    <FlatList data={places} keyExtractor={item => item.id} renderItem={} />
+    <FlatList
+      data={places}
+      keyExtractor={item => item.id}
+      renderItem={<PlaceItem />}
+    />
   );
 };
 
