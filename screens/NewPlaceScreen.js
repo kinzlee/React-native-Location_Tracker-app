@@ -11,7 +11,7 @@ import useDispatch from "react-redux";
 import colors from "../constants/colors";
 import * as actionPlaces from "../store/Places_action";
 
-const NewPlaceScreen = () => {
+const NewPlaceScreen = ({ navigation }) => {
   const [titleValue, setTitleValue] = useState("");
 
   const dispatch = useDispatch();
@@ -19,7 +19,10 @@ const NewPlaceScreen = () => {
     setTitleValue(text);
   };
 
-  const savePlaceHandler = () => {};
+  const savePlaceHandler = () => {
+    dispatch(actionPlaces.addPlace(titleValue));
+    navigation.goBack();
+  };
 
   return (
     <ScrollView>
