@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,11 +10,23 @@ import {
 import colors from "../constants/colors";
 
 const NewPlaceScreen = () => {
+  const [titleValue, setTitleValue] = useState("");
+
+  const titleChangeHandler = () => {
+    setTitleValue(text);
+  };
+
+  const savePlaceHandler = () => {};
+
   return (
     <ScrollView>
       <View style={styles.form}>
         <Text style={styles.label}>This is the New place screen</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          style={styles.textInput}
+          value={titleValue}
+          onChangeText={titleChangeHandler}
+        />
         <Button
           title="Save Place"
           color={colors.primaryColor}
