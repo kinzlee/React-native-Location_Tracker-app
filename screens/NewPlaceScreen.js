@@ -7,11 +7,14 @@ import {
   TextInput,
   Button
 } from "react-native";
+import useDispatch from "react-redux";
 import colors from "../constants/colors";
+import * as actionPlaces from "../store/Places_action";
 
 const NewPlaceScreen = () => {
   const [titleValue, setTitleValue] = useState("");
 
+  const dispatch = useDispatch();
   const titleChangeHandler = () => {
     setTitleValue(text);
   };
