@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useCallback } from "react";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-const MapScreen = () => {
+const MapScreen = ({ navigation }) => {
   const [selectedLocation, setSelectedLocation] = useState();
   const mapRegion = {
     latitude: 37.78,
@@ -17,6 +17,13 @@ const MapScreen = () => {
     });
   };
 
+  const savePickedLocation = useCallback(() => {
+    if (!selectedLocation) {
+      return;
+    }
+    navigation.navigate("NewPlace", { mapPickedLocation: selectedLocation });
+  }, [selectedLocation]);
+
   let markerCoordinate;
 
   if (selectedLocation) {
@@ -25,6 +32,21 @@ const MapScreen = () => {
       longitude: selectedLocation.lng
     };
   }
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          style={styles.headerBtn}
+          onPress={() => {
+            savePickedLocation();
+          }}
+        >
+          <Text style={styles.headerText}>Save</Text>
+        </TouchableOpacity>
+      )
+    });
+  }, [navigation, savePickedLocation]);
 
   return (
     <MapView
@@ -47,6 +69,13 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1
+  },
+  headerBtn: {
+    marginHorizontal: 20
+  },
+  headerText: {
+    fontSize: 16,
+    color: "#fff"
   }
 });
 

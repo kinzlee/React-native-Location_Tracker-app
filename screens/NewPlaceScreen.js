@@ -13,7 +13,7 @@ import * as actionPlaces from "../store/Places_action";
 import ImagePicker from "../components/ImageSelector";
 import LocationPicker from "../components/LocationSelector";
 
-const NewPlaceScreen = ({ navigation }) => {
+const NewPlaceScreen = props => {
   const [titleValue, setTitleValue] = useState("");
   const [selectedImage, setSelectedImage] = useState();
 
@@ -28,7 +28,7 @@ const NewPlaceScreen = ({ navigation }) => {
 
   const savePlaceHandler = () => {
     dispatch(actionPlaces.addPlace(titleValue, selectedImage));
-    navigation.goBack();
+    props.navigation.goBack();
   };
 
   return (
@@ -41,7 +41,7 @@ const NewPlaceScreen = ({ navigation }) => {
           onChangeText={titleChangeHandler}
         />
         <ImagePicker onImage={imageTakenHandler} />
-        <LocationPicker navigation={navigation} />
+        <LocationPicker navigation={props.navigation} />
         <Button
           title="Save Place"
           color={colors.primaryColor}
