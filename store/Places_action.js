@@ -1,11 +1,13 @@
 import * as FileSystem from "expo-file-system";
 
 export const ADD_PLACE = "ADD_PLACE";
-import { insertPlace } from "../helpers/db";
+export const SET_PLACES = "AET_PLACES";
+
+import { insertPlace, fetchPlaces } from "../helpers/db";
 
 export const addPlace = (title, image) => {
   return async dispatch => {
-    const fileName = split("/").pop();
+    const fileName = image.split("/").pop();
     const newPath = FileSystem.documentDirectory + fileName;
 
     try {
@@ -26,6 +28,21 @@ export const addPlace = (title, image) => {
       throw err;
     }
 
-    dispatch({ type: ADD_PLACE, placeData: { title: title, image: newPath } });
+    dispatch({
+      type: ADD_PLACE,
+      placeData: { id: dbResult.insertId, title: title, image: newPath }
+    });
+  };
+};
+
+export const loadedPlaces = () => {
+  return async dispatch => {
+    try {
+      const dbResult = await fetchPlaces();
+      console.log(dbResult);
+      dispatch({ type: SET_PLACES, places: dbResult.rows._array });
+    } catch (err) {
+      throw err;
+    }
   };
 };
