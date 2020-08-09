@@ -1,7 +1,10 @@
-const Place = (id, title, imageUri) => ({
+const Place = (id, title, imageUri, address, lat, lng) => ({
   id,
   title,
-  imageUri
+  imageUri,
+  address,
+  lat,
+  lng
 });
 
 export default Place;

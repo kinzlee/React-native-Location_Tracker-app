@@ -12,7 +12,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import MapPreview from "../components/MapPreview";
 
-const LocationSelector = ({ navigation, route }) => {
+const LocationSelector = ({ navigation, route, onLocationPicked }) => {
   const [isFetching, setIsFetching] = useState();
   const [pickedLocation, setPickedLocation] = useState();
 
@@ -22,8 +22,9 @@ const LocationSelector = ({ navigation, route }) => {
     console.log(mapPickedLocation, "////111111111111111111!!!!");
     if (mapPickedLocation) {
       setPickedLocation(mapPickedLocation);
+      onLocationPicked(mapPickedLocation);
     }
-  }, [mapPickedLocation]);
+  }, [mapPickedLocation, onLocationPicked]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -51,6 +52,10 @@ const LocationSelector = ({ navigation, route }) => {
       });
       console.log(location);
       setPickedLocation({
+        lat: location.coords.latitude,
+        lng: location.coords.latitude
+      });
+      onLocationPicked({
         lat: location.coords.latitude,
         lng: location.coords.latitude
       });
