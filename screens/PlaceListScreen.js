@@ -16,7 +16,7 @@ const PlaceListScreen = ({ navigation }) => {
             title="add place"
             iconName="md-add"
             onPress={() => {
-              navigation.navigate("NewPlace");
+              navigation.navigate("NewPlace", { mapPickedLocation: null });
             }}
           />
         </HeaderButtons>

@@ -16,13 +16,14 @@ const LocationSelector = ({ navigation, route }) => {
   const [isFetching, setIsFetching] = useState();
   const [pickedLocation, setPickedLocation] = useState();
 
-  useEffect(() => {
-    const { mapPickedLocation } = route.params;
+  const { mapPickedLocation } = route.params;
 
+  useEffect(() => {
+    console.log(mapPickedLocation, "////111111111111111111!!!!");
     if (mapPickedLocation) {
       setPickedLocation(mapPickedLocation);
     }
-  }, []);
+  }, [mapPickedLocation]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
