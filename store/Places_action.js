@@ -39,24 +39,23 @@ export const addPlace = (title, image, location) => {
         location.lng
       );
       console.log(dbResult, "DDDDDFSDFS");
+      dispatch({
+        type: ADD_PLACE,
+        placeData: {
+          id: dbResult.insertId,
+          title: title,
+          image: newPath,
+          address: address,
+          coords: {
+            lat: location.lat,
+            lng: location.lng
+          }
+        }
+      });
     } catch (err) {
       console.log(err);
       throw err;
     }
-
-    dispatch({
-      type: ADD_PLACE,
-      placeData: {
-        id: dbResult.insertId,
-        title: title,
-        image: newPath,
-        address: address,
-        coords: {
-          lat: location.lat,
-          lng: location.lng
-        }
-      }
-    });
   };
 };
 
