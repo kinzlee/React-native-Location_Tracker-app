@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
             pl.imageUri,
             pl.address,
             pl.lat,
-            pl.lng
+            Number(pl.lng)
           )
         )
       };

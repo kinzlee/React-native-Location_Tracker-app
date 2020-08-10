@@ -2,15 +2,21 @@ import React, { useState, useCallback } from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-const MapScreen = ({ navigation }) => {
-  const [selectedLocation, setSelectedLocation] = useState();
+const MapScreen = ({ navigation, route }) => {
+  const { initialLocation, readOnly } = route.params;
+  const [selectedLocation, setSelectedLocation] = useState(initialLocation);
   const mapRegion = {
-    latitude: 37.78,
-    longitude: -122.43,
+    latitude: initialLocation ? initialLocation.lat : 37.78,
+    longitude: initialLocation ? initialLocation.lng : -122.4,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421
   };
+  console.log(mapRegion, "<<<<<<<>>>>>>>>");
+
   const selectLocationHandler = event => {
+    if (readOnly) {
+      return;
+    }
     setSelectedLocation({
       lat: event.nativeEvent.coordinate.latitude,
       lng: event.nativeEvent.coordinate.longitude
@@ -32,19 +38,26 @@ const MapScreen = ({ navigation }) => {
       longitude: selectedLocation.lng
     };
   }
+  console.log(markerCoordinate, "^^^^^^^^^^^^^^^^^///");
+
+  // if (readOnly) {
+  //   return {};
+  // }
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity
-          style={styles.headerBtn}
-          onPress={() => {
-            savePickedLocation();
-          }}
-        >
-          <Text style={styles.headerText}>Save</Text>
-        </TouchableOpacity>
-      )
+      headerRight: readOnly
+        ? null
+        : () => (
+            <TouchableOpacity
+              style={styles.headerBtn}
+              onPress={() => {
+                savePickedLocation();
+              }}
+            >
+              <Text style={styles.headerText}>Save</Text>
+            </TouchableOpacity>
+          )
     });
   }, [navigation, savePickedLocation]);
 
