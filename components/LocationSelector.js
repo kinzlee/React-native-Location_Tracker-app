@@ -19,7 +19,6 @@ const LocationSelector = ({ navigation, route, onLocationPicked }) => {
   const { mapPickedLocation } = route.params;
 
   useEffect(() => {
-    console.log(mapPickedLocation, "////111111111111111111!!!!");
     if (mapPickedLocation) {
       setPickedLocation(mapPickedLocation);
       onLocationPicked(mapPickedLocation);
